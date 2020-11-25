@@ -84,7 +84,7 @@ int getNumSatellites(const char* GPGGAstr) {
 
 void sendSMS(const char* GPGGAstr)
 {
-  //Serial.println("Sending SMS.\n");
+  Serial.println("Sending SMS.\n");
   
 
   double latitude;
@@ -113,6 +113,11 @@ void sendSMS(const char* GPGGAstr)
     tmp = getComma(7, GPGGAstr);
     num = getIntNumber(&GPGGAstr[tmp]);
     sprintf(buff, "satellites number = %d ", num);
+    LSMS.println(buff);
+
+
+
+    sprintf(buff, "Hei på deg.");
     LSMS.println(buff);
 
     sprintf(buff, "Lat=%dd %5.4fm", latdeg, latmin);
@@ -301,25 +306,25 @@ void setup()
   // put your setup code here, to run once:
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
-//  //Serial.begin(115200);                 // Initializes serial port at 115200 bauds
+//  Serial.begin(115200);                 // Initializes serial port at 115200 bauds
   
-//  while (//Serial.available() == 0) {}    // Wait until user inputs data and start the program when data is received
-//  startBuffer = //Serial.readString();    // Save the users input in startBuffer variable
-//
-//  //Serial.println("Starting Send SMS!"); // Start the Send SMS program
-//  
+//  while (Serial.available() == 0) {}    // Wait until user inputs data and start the program when data is received
+//  startBuffer = Serial.readString();    // Save the users input in startBuffer variable
+
+  Serial.println("Starting Send SMS!"); // Start the Send SMS program
+  
   while (!LSMS.ready())                 // Wait for the sim to initialize
   {
     delay(1000);                        // Wait for a second and then try again
   }
   
-//  //Serial.println("Sim initialized");    // When SIM is started, print "Sim initialized" in the serial port
+  Serial.println("Sim initialized");    // When SIM is started, print "Sim initialized" in the serial port
 
   LSMS.beginSMS("97404115");          // Saves the number where user wants to send SMS. To be changed before uploading sketch
 
 
   LGPS.powerOn();
-//  //Serial.println("LGPS Power on, and waiting ...");
+  Serial.println("LGPS Power on, and waiting ...");
   delay(3000);
 }
 
@@ -328,13 +333,13 @@ void toggleLed()
 {
   if(bLedOn)
   {
-//    //Serial.println("LedOff.\n");
+    Serial.println("LedOff.\n");
     bLedOn = false;
     digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
   }
   else
   {
-//    //Serial.println("LedOn.\n");
+    Serial.println("LedOn.\n");
     bLedOn = true;
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   }
@@ -369,5 +374,5 @@ void loop()
     toggleLed();
   }
     
-  delay(1000);
+  delay(500);
 }
