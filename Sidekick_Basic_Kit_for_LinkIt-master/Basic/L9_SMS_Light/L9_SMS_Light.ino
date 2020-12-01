@@ -15,7 +15,7 @@
 
 const int LED_BUILTIN = 13;               // normal blinking led on board
 const int OUTPUT_D4 = 4;               
-const int INPUT_D7 = 7;               
+const int OUTPUT_D7 = 7;               
 
 void setup()
 {
@@ -24,7 +24,7 @@ void setup()
   // initialize digital pin LED_BUILTIN as an output.
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(OUTPUT_D4, OUTPUT);
-  pinMode(INPUT_D7, INPUT);
+  pinMode(OUTPUT_D7, INPUT);
 
   digitalWrite(OUTPUT_D4, LOW);
 //digitalWrite(OUTPUT_D7, HIGH);
@@ -78,38 +78,14 @@ void loop()
             
 
             digitalWrite(OUTPUT_D4, HIGH);
-            //digitalWrite(OUTPUT_D7, LOW);
+            digitalWrite(OUTPUT_D7, LOW);
             
             //digitalWrite(OUTPUT_D7, HIGH);
 
-            int val = 42;
-            val = digitalRead(INPUT_D7);
-            Serial.print("before delay input d7 is value: ");
-            Serial.println(val);
-            if(val == 1)
-            {
-              digitalWrite(LED_BUILTIN, HIGH);         // lamp on
-            }
-            else if(val == 0)
-            {
-              digitalWrite(LED_BUILTIN, LOW);         // lamp on
-            }
-
             delay(2000);
             digitalWrite(OUTPUT_D4, LOW);
+            digitalWrite(OUTPUT_D7, HIGH);
 
-            val = 42;
-            val = digitalRead(INPUT_D7);
-            Serial.print("after delay input d7 is value: ");
-            Serial.println(val);
-            if(val == 1)
-            {
-              digitalWrite(LED_BUILTIN, HIGH);         // lamp on
-            }
-            else if(val == 0)
-            {
-              digitalWrite(LED_BUILTIN, LOW);         // lamp on
-            }
             
         }
 
